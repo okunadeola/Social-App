@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<form (submit)="submit()" [formGroup]="formData">
+  <div class="form-row col-md-5 mx-auto card mt-1 p-3">
+
+    <div class="col-md-12 mb-3" *ngIf="!isSignin"> 
+      <label for="validationServerUsername">FirstName <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-user"></i></span>
+        </div>
+        <input formControlName="firstname" name="firstname"  type="text" [class]="f.firstname.touched && f.firstname.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="firstname" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.firstname.touched && f.firstname.invalid" class="invalid-feedback" >
+          this field is required
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3" *ngIf="!isSignin">
+      <label for="validationServerUsername">LastName <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-user"></i></span>
+        </div>
+        <input formControlName="lastname" name="lastname"  type="text" [class]="f.lastname.touched && f.lastname.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="lastname" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.lastname.touched && f.lastname.invalid" class="invalid-feedback" >
+          this field is required
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mb-3" *ngIf="!isSignin">
+      <label for="validationServerUsername">Username <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-user"></i></span>
+        </div>
+        <input formControlName="username" name="username"  type="text" [class]="f.username.touched && f.username.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.username.touched && f.username.invalid" class="invalid-feedback" >
+          this field is required
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3">
+      <label for="validationServerUsername">Email <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-mail-box">@</i></span>
+        </div>
+        <input formControlName="email" name="email"  type="email" [class]="f.email.touched && f.email.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="email" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.email.touched && f.email.invalid" class="invalid-feedback" >
+          <small class="text-danger" *ngIf="f.email.errors?.email">please enter a valid email</small>
+          <small class="text-danger" *ngIf="f.email.errors?.required">this field is required</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3">
+      <label for="validationServerUsername">Password <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-key"></i></span>
+        </div>
+        <input formControlName="password" name="password"  type="password" [class]="f.password.touched && f.password.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="password" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.password.touched && f.password.invalid" class="invalid-feedback" >
+          <small class="text-danger" *ngIf="f.password.errors?.required">this field is required</small>
+          <small class="text-danger" *ngIf="f.password.errors?.minlength">the minimum length for this field is {{formData.get("password")?.errors?.minlength.requiredLength}} characters</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3" *ngIf="!isSignin">
+      <label for="validationServerUsername">Confirm Password <sup class="text-danger text-lg">*</sup></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-key"></i></span>
+        </div>
+        <input formControlName="confirmPassword" name="confirmPassword"  type="password" [class]="f.confirmPassword.touched && f.confirmPassword.invalid? 'form-control is-invalid' : 'form-control is-valid' " id="validationServerUsername" placeholder="confirmPassword" aria-describedby="inputGroupPrepend3" required>
+        <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="invalid-feedback" >
+          <small class="text-danger" *ngIf="f.confirmPassword.errors?.required">this field is required</small>
+          <small class="text-danger" *ngIf="f.confirmPassword.errors?.minlength">the minimum length for this field is {{formData.get("password")?.errors?.minlength.requiredLength}} characters</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mx-auto">
+      <button class="btn btn-primary btn-block" [disabled]="isSignin ? (f.email.invalid || f.password.invalid) : formData.invalid" type="submit">{{isSignin ? 'Login' : 'Sign Up'}}</button><br>
+    </div>
+    <div class="col-md-12 mx-auto">
+      <button (click)="sign()" *ngIf="isSignin"  class="btn btn-light btn-sm">Don't have an account? sign Up</button>
+      <button (click)="sign()" *ngIf="!isSignin"  class="btn btn-light btn-sm">Already a user? sign In</button>
+    </div>
+  </div>
+  
+</form>
+
+<!-- *ngIf="f.message.errors?.required" --> 
+<!-- f.email.invalid -->
